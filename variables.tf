@@ -30,3 +30,14 @@ variable "cidr" {
     error_message = "The CIDR block range must be valid IPv4 CIDR block (e.g., 10.0.0.1/16)"
   }
 }
+
+variable "private_subnet_cidr" {
+  description = "The CIDR block for the private subnet."
+  type        = string
+  default     = "10.0.1.0/28"
+
+  validation {
+    condition     = can(cidrhost(var.private_subnet_cidr, 0))
+    error_message = "The CIDR block range must be valid IPv4 CIDR block (e.g., 10.0.0.2/24)"
+  }
+}
